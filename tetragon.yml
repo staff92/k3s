@@ -165,11 +165,12 @@ tetragon:
     metricsLabelFilter: "namespace,workload,pod,binary"
     serviceMonitor:
       # -- Whether to create a 'ServiceMonitor' resource targeting the tetragon pods.
-      enabled: false
+      enabled: true
       # -- The set of labels to place on the 'ServiceMonitor' resource.
       labelsOverride: {}
       # -- Extra labels to be added on the Tetragon ServiceMonitor.
-      extraLabels: {}
+      extraLabels:
+        release: prometheus
       # -- Interval at which metrics should be scraped. If not specified, Prometheus' global scrape interval is used.
       scrapeInterval: "10s"
   grpc:
@@ -303,11 +304,12 @@ tetragonOperator:
     port: 2113
     serviceMonitor:
       # -- Whether to create a 'ServiceMonitor' resource targeting the tetragonOperator pods.
-      enabled: false
+      enabled: true
       # -- The set of labels to place on the 'ServiceMonitor' resource.
       labelsOverride: {}
       # -- Extra labels to be added on the Tetragon Operator ServiceMonitor.
-      extraLabels: {}
+      extraLabels:
+        release: prometheus
       # -- Interval at which metrics should be scraped. If not specified, Prometheus' global scrape interval is used.
       scrapeInterval: "10s"
 # -- Tetragon events export settings

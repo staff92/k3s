@@ -471,8 +471,8 @@ gitea:
     enabled: true
     serviceMonitor:
       enabled: true
-      # additionalLabels:
-      #   name: prometheus
+      additionalLabels:
+        release: prometheus
       interval: ""
       relabelings: []
       scheme: ""
