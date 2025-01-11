@@ -6,7 +6,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
 data:
-  prometheus-dashboard.json: |
+  traefik-dashboard.json: |
     {
       "__inputs": [
         {
