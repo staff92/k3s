@@ -1026,8 +1026,11 @@ grafana:
   ##
   defaultDashboardsEditable: true
 
-  adminPassword: prom-operator
-
+  # adminPassword: prom-operator
+  admin:
+    existingSecret: grafana-secrets
+    userKey: grafana-admin-user
+    passwordKey: grafana-admin-password
   rbac:
     ## If true, Grafana PSPs will be created
     ##
