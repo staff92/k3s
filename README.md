@@ -20,6 +20,8 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo add grafana https://grafana.github.io/helm-charts
 
 helm repo add gitea-charts https://dl.gitea.com/charts/
+
+helm repo add uptime-kuma https://helm.irsigler.cloud
 ```
 
 ## Helm install
@@ -34,6 +36,8 @@ helm install sealed-secrets -n kube-system --set-string fullnameOverride=sealed-
 helm install tetragon ${EXTRA_HELM_FLAGS[@]} cilium/tetragon -n kube-system -f tetragon.yml
 
 helm install gitea gitea-charts/gitea -f gitea.yml
+
+helm install kuma uptime-kuma/uptime-kuma --install --namespace monitoring -f kuma.yml
 ```
 
 ## Helm upgrade
@@ -41,5 +45,7 @@ helm install gitea gitea-charts/gitea -f gitea.yml
 ```
 helm upgrade tetragon cilium/tetragon -n kube-system --version 0.9.0
 
-helm upgrade prometheus prometheus-community/kube-prometheus-stack -f prometheus.yml
+helm upgrade prometheus prometheus-community/kube-prometheus-stack -f prometheus.yml --version 0.0.1
+
+helm upgrade kuma uptime-kuma/uptime-kuma --install --namespace monitoring -f kuma.yml --version 0.0.1
 ```
