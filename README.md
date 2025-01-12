@@ -7,7 +7,7 @@ K3s setup
 https://github.com/k3s-io/k3s-ansible
 
 ```
-ansible-playbook playbooks/site.yml -i inventory.yml --ask-pass
+ansible-playbook playbooks/site.yml -i inventory.yml --ask-pass -e "extra_server_args=--disable traefik --disable servicelb --disable metrics-server"
 ```
 
 ## Helm repo 
