@@ -38,6 +38,10 @@ helm install tetragon ${EXTRA_HELM_FLAGS[@]} cilium/tetragon -n kube-system -f t
 helm install gitea gitea-charts/gitea -f gitea.yml
 
 helm install kuma uptime-kuma/uptime-kuma --install --namespace monitoring -f kuma.yml
+
+helm install alertmanager-ntfy oci://codeberg.org/wrenix/helm-charts/alertmanager-ntfy --values alertmanager-ntfy.ym
+
+helm install ntfy oci://codeberg.org/wrenix/helm-charts/ntfy --values ntfy.yml
 ```
 
 ## Helm upgrade
