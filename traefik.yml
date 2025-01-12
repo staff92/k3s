@@ -203,7 +203,7 @@ ingressRoute:
     tls: {}
   healthcheck:
     # -- Create an IngressRoute for the healthcheck probe
-    enabled: false
+    enabled: true
     # -- Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
     annotations: {}
     # -- Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)

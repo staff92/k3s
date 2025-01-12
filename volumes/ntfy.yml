@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ntfy-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  claimRef:
+    name: ntfy-pvc
+    namespace: monitoring
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  local:
+    path: /mnt/disks/ntfy
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - server-1

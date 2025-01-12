@@ -49,3 +49,7 @@ helm upgrade prometheus prometheus-community/kube-prometheus-stack -f prometheus
 
 helm upgrade kuma uptime-kuma/uptime-kuma --install --namespace monitoring -f kuma.yml --version 0.0.1
 ```
+
+## alertmanager to ntfy
+
+kubectl edit deployment alertmanager-ntfy > remove liveness et readiness probes

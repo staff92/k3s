@@ -306,7 +306,7 @@ alertmanager:
   ##
   config:
     global:
-      resolve_timeout: 5m
+      resolve_timeout: 2m
     inhibit_rules:
       - source_matchers:
           - 'severity = critical'
@@ -333,15 +333,17 @@ alertmanager:
     route:
       group_by: ['namespace']
       group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 12h
-      receiver: 'null'
+      group_interval: 2m
+      repeat_interval: 2m
+      receiver: 'ntfy'
       routes:
-      - receiver: 'null'
+      - receiver: 'ntfy'
         matchers:
           - alertname = "Watchdog"
     receivers:
-    - name: 'null'
+    - name: 'ntfy'
+      webhook_configs:
+        - url: http://alertmanager-ntfy
     templates:
     - '/etc/alertmanager/config/*.tmpl'
 
