@@ -383,7 +383,7 @@ signing:
 ## @param actions.existingSecret Secret that contains the token
 ## @param actions.existingSecretKey Secret key
 actions:
-  enabled: true
+  enabled: false
   statefulset:
     annotations: {}
     labels: {}
@@ -453,7 +453,7 @@ gitea:
   ## @param gitea.admin.email Email for the Gitea admin user
   ## @param gitea.admin.passwordMode Mode for how to set/update the admin user password. Options are: initialOnlyNoReset, initialOnlyRequireReset, and keepUpdated
   admin:
-    existingSecret: gitea-admin-secrets
+    existingSecret: gitea-secrets
     # existingSecret:
     # username: gitea_admin
     # password: r8sA8CPHD9!bt6d
@@ -481,7 +481,18 @@ gitea:
 
   ## @param gitea.ldap LDAP configuration
   ldap:
-    []
+    - name: LDAP
+      existingSecret: gitea-secrets
+      securityProtocol: unencrypted
+      host: ldap.auth.svc.cluster.local
+      port: "389"
+      userSearchBase: ou=people,dc=test,dc=fr
+      userFilter: (&(objectClass=inetOrgPerson)(mail=%[1]s))
+      emailAttribute: mail
+      ##bind_password: "__LDAP_BIND_PASSWORD__"
+      #bindDn: cn=admin,dc=test,dc=fr
+     #bindPassword: test
+      #adminFilter: cn=admin,dc=test,dc=fr
     # - name: "LDAP 1"
     #  existingSecret:
     #  securityProtocol:
@@ -526,9 +537,9 @@ gitea:
   #    PASSWORD_COMPLEXITY: spec
 
   ## @param gitea.additionalConfigSources Additional configuration from secret or configmap
-  additionalConfigSources: []
-  #   - secret:
-  #       secretName: gitea-app-ini-oauth
+ # additionalConfigSources:
+ #     - secret:
+ #         secretName: gitea-ldap-secrets
   #   - configMap:
   #       name: gitea-app-ini-plaintext
 

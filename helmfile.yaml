@@ -1,0 +1,46 @@
+# helmfile sync 
+# helmfile apply
+# kubectl apply -f ./output/secrets
+repositories:
+  - name: gitea-charts
+    url: https://dl.gitea.com/charts/
+  - name: prometheus-community    
+    url: https://prometheus-community.github.io/helm-charts
+  - name: jameswynn               
+    url: http://jameswynn.github.io/helm-charts/           
+  - name: goauthentik             
+    url: https://charts.goauthentik.io/                    
+  - name: cetic                   
+    url: https://cetic.github.io/helm-charts  
+  - name: helm-openldap
+    url: https://jp-gouin.github.io/helm-openldap/
+
+releases:
+  - name: ldap
+    namespace: auth
+    createNamespace: true
+    chart: helm-openldap/openldap-stack-ha
+    version: "4.3.1" 
+    values:
+      - ./ldap.yml
+  - name: gitea
+    namespace: gitea
+    createNamespace: true
+    chart: gitea-charts/gitea
+    version: "7.0.1" 
+    values:
+      - ./gitea.yml
+  - name: prometheus
+    namespace: monitoring
+    createNamespace: true
+    chart: prometheus-community/kube-prometheus-stack 
+    version: "68.3.0" 
+    values:
+      - ./prometheus.yml
+  - name: authentik
+    namespace: auth
+    createNamespace: true
+    chart: goauthentik/authentik
+    version: "2024.12.3" 
+    values:
+      - ./authentik.yml
